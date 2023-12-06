@@ -6,7 +6,7 @@ services:
     environment:
       MYSQL_HOST: mysqldb
       MYSQL_PORT: 3306
-      MYSQL_PASSWORD: rihabtkd
+      MYSQL_PASSWORD: root
       MYSQL_USER: root
     ports: 
       - "8080:8080"
@@ -28,7 +28,7 @@ services:
     container_name: mysqldb
     environment:
       MYSQL_DATABASE: springapp
-      MYSQL_ROOT_PASSWORD: rihabtkd
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3308:3306"
     networks:
