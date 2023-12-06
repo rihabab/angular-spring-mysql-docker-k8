@@ -1,0 +1,38 @@
+version: '3'
+services:
+  backend:
+    image: localhost:5000/spring4
+    container_name: spring-backend
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_PORT: 3306
+      MYSQL_PASSWORD: rihabtkd
+      MYSQL_USER: root
+    ports: 
+      - "8080:8080"
+    working_dir: /app
+    networks:
+      - mynetwork  
+    depends_on:
+      - mysql 
+  frontend:
+    image: localhost:5000/frontend-ang
+    container_name: angular-frontend
+    ports:
+      - "8081:80"
+    working_dir: /app
+    networks:
+      - mynetwork
+  mysql:
+    image: mysql:latest
+    container_name: mysqldb
+    environment:
+      MYSQL_DATABASE: springapp
+      MYSQL_ROOT_PASSWORD: rihabtkd
+    ports:
+      - "3308:3306"
+    networks:
+      - mynetwork
+networks:
+  mynetwork:  
+    driver: bridge
