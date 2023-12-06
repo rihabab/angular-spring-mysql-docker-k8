@@ -1,0 +1,10 @@
+
+FROM openjdk:17-alpine
+
+WORKDIR /app
+
+COPY target/ .
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "spring-boot-data-jpa-mysql.jar", "--spring.config.location=classes/application.properties"]
