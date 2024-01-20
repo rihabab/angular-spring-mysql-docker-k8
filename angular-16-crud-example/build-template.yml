@@ -1,0 +1,20 @@
+# build-template.yml
+.build_template:
+  script:
+    - echo "This is a generic build job"
+  cache:
+    key: "$CI_COMMIT_REF_NAME-build"
+    paths:
+      - docker-cache/
+      - node_modules/
+
+angular_build:
+  extends: .build_template
+  stage: build
+  image: node:latest
+  before_script:
+    - npm install
+    - npm install -g @angular/cli
+    - echo "Dependencies installed successfully"
+  script:
+    - ng build

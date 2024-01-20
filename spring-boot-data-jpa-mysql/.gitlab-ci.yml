@@ -1,0 +1,33 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+  - package
+  - deploy
+
+maven-build:
+  image: maven:latest
+  stage: build
+  script:
+    - mvn package -B -DskipTests=true
+  artifacts:
+    paths:
+      - target/*.jar
+
+docker-build:
+  stage: package
+  script:
+    - docker login -u rihabab -p "$DOCKER_HUB_PASSWORD"
+    - docker build -t "rihabab/springbootdatajpamysql:latest" .
+    - docker push "rihabab/springbootdatajpamysql:latest"
+
+docker-deploy:
+  stage: deploy
+  before_script:
+    - apk add --update curl && rm -rf /var/cache/apk/*
+  script:
+    - docker run -d -p 8080:8080 --name springbootdatajpamysql rihabab/springbootdatajpamysql
+  

@@ -45,13 +45,13 @@ spec:
         ports:
         - containerPort: 8080
           name: backend-port
-        resources:
-          limits:
-            memory: "500Mi"
-            cpu: "500m"
-          requests:
-            memory: "250Mi"
-            cpu: "250m"
+        # resources:
+        #   limits:
+        #     memory: "500Mi"
+        #     cpu: "500m"
+        #   requests:
+        #     memory: "250Mi"
+        #     cpu: "250m"
         env:
         - name: MYSQL_HOST
           valueFrom:
